@@ -69,3 +69,57 @@ self.addEventListener('fetch', e => {
           })
   )
 })
+
+self.addEventListener('push', e => {
+  console.log('Evento: Push')
+
+  let title = 'Push Notificación Demo',
+    options = {
+      body: 'Click para regresar a la aplicación',
+      icon: './img/icon_192x192.png',
+      vibrate: [100, 50, 100],
+      data: { id: 1 },
+      actions: [
+        { 'action': 'Si', 'title': 'Amo esta aplicación :)', icon: './img/icon_192x192.png' },
+        { 'action': 'No', 'title': 'No me gusta esta aplicación :(', icon: './img/icon_192x192.png' }
+      ]
+    }
+
+    e.waitUntil( self.registration.showNotification(title, options) )
+})
+
+self.addEventListener('notificationclick', e => {
+  console.log(e)
+
+  if ( e.action === 'Si' ) {
+    console.log('AMO esta aplicación')
+    clients.openWindow('https://ed.team')
+  } else if ( e.action === 'No' ) {
+    console.log('No me gusta esta aplicación')
+  }
+
+  e.notification.close()
+})
+
+self.addEventListener('sync', e => {
+  console.log('Evento: Sincronización de Fondo', e)
+
+  //Revisamos que la etiqueta de sincronización sea la que definimos o la que emulan las devtools
+  if ( e.tag === 'github' || e.tag === 'test-tag-from-devtools' ) {
+    e.waitUntil(
+      //Comprobamos todas las pestañas abiertas y les enviamos postMessage
+      self.clients.matchAll()
+        .then(all => {
+          return all.map(client => {
+            return client.postMessage('online')
+          })
+        })
+        .catch( err => console.log(err) )
+    )
+  }
+})
+
+/* self.addEventListener('message' e => {
+  console.log('Desde la Sincronización de Fondo: ', e.data)
+  fetchGitHubUser( localStorage.getItem('github'), true )
+}) */
