@@ -1,0 +1,26 @@
+/* Home */
+
+.Main {
+  margin: auto;
+  width: 90%;
+
+  @media screen and (min-width: 64em) {
+    width: 70%;
+  }
+
+  &-title { font-size: 5vw; }
+
+  &-logos {
+    @media screen and (min-width: 64em) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & > img {
+        max-width: 30%;
+      }
+    }
+  }
+
+  & > * { padding: 1rem; }
+}
