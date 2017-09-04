@@ -1,44 +1,21 @@
-$font: 'Chalet', sans-serif;
+$font-main: 'Roboto', sans-serif;
+$font-secondary: 'Raleway', sans-serif;
 $font-size: 16px;
 $font-color: #FFF;
-$bg-color: #2B3A42;
-$dark: #1D78C1;
-$light: #8DD6F9;
-
-@font-face {
-  font-family: 'Chalet';
-  font-style: normal;
-  font-weight: normal;
-  src: url(./fonts/Chalet.eot);
-  src: url(./fonts/Chalet.eot?#iefix) format('embedded-opentype'),
-    url(./fonts/Chalet.woff) format('woff'),
-    url(./fonts/Chalet.ttf) format('truetype'),
-    url(./fonts/Chalet.svg#Chalet) format('svg');
-}
+$first-color: #2279D7;
+$second-color: #25C9FF;
+$third-color: #D24F56;
+$fourth-color: #FA8086;
+$error-color:  #E80808;
+$alert-color: #E8E808;
 
 html {
   font: {
-    family: $font;
+    family: $font-main;
     size: $font-size;
   }
   color: $font-color;
-  background: {
-    color: $bg-color;
-    image: url('./img/webpack-cube.svg');
-    repeat: repeat;
-    position: center;
-    attachment: fixed;
-    size: 10%;
-  }
-}
-
-body {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  text-align: center;
-  background-color: rgba(0, 0, 0, .75);
+  background: linear-gradient(-45deg, $second-color, $first-color, $second-color) no-repeat fixed;
 }
 
 a {
@@ -47,10 +24,34 @@ a {
   color: $font-color;
   transition: all .3s ease-out;
 
-  &:hover { color: $light; }
+  &:hover { color: $second-color; }
 }
 
-img {
+button {
+  border: 0;
+  font: {
+    size: 5vw;
+    family: $font-secondary;
+    weight: 700;
+  }
+  cursor: pointer;
+  color: $font-color;
+  background-color: transparent;
+  transition: all .3s ease-out;
+
+  @media screen and (min-width: 64em) { font-size: 2rem; }
+
+  &:focus {
+    border: 0;
+    outline: 0;
+  }
+
+  &:hover { transform: rotateY(180deg); }
+
+  & > * { display: block;  }
+}
+
+img, video {
   margin: auto;
   display: block;
   max-width: 100%;

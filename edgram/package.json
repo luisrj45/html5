@@ -45,6 +45,7 @@
     "webpack-dev-server": "^2.6.1"
   },
   "dependencies": {
+    "firebase": "^4.3.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   }

@@ -9,8 +9,7 @@ module.exports = {
   context: srcDir,
   devtool: 'source-map',
   entry: {
-    script: './index.js',
-    another_script: './another.js'
+    script: './index.js'
   },
   output: {
     path: publicDir,
@@ -71,11 +70,6 @@ module.exports = {
       template: path.join(srcDir, 'template.html'),
       filename: 'index.html',
       chunks: ['script']
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(srcDir, 'template.html'),
-      filename: 'another.html',
-      chunks: ['another_script']
     })
   ]
 }

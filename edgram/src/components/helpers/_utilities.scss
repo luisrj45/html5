@@ -1,1 +1,28 @@
-.fa { font-size: 4vw; }
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.u-show {
+  display: block;
+  transition: opacity 400ms;
+}
+
+.u-hide {
+  display: none;
+  opacity: 0;
+}
+
+.u-fadein { animation: fadeIn 400ms; }
+
+.u-fixed {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  padding: .5rem;
+  height: 3rem;
+  width: 100%;
+  background: linear-gradient(-45deg, $fourth-color, $third-color, $fourth-color);
+}
+
+.u-jc-flex-start { justify-content: flex-start; }

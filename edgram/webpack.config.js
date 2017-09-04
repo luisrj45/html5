@@ -12,8 +12,7 @@ module.exports = {
   context: srcDir,
   devtool: 'hidden-source-map',
   entry: {
-    script: './index.js',
-    another_script: './another.js'
+    script: './index.js'
   },
   output: {
     path: publicDir,
@@ -102,19 +101,6 @@ module.exports = {
         removeComments: true
       },
       chunks: ['script']
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(srcDir, 'template.html'),
-      filename: 'another.html',
-      title: 'Webpack Starter Kit - React',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
-      favicon: './assets/img/favicon.ico',
-      hash: true,
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true
-      },
-      chunks: ['another_script']
     })
   ]
 }
