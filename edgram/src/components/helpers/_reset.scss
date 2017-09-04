@@ -8,6 +8,7 @@ $third-color: #D24F56;
 $fourth-color: #FA8086;
 $error-color:  #E80808;
 $alert-color: #E8E808;
+$success-color: #007700;
 
 html {
   font: {
@@ -54,6 +55,6 @@ button {
 img, video {
   margin: auto;
   display: block;
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
