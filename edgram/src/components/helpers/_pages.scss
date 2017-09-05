@@ -59,13 +59,59 @@
   }
 }
 
-.Footer {
-  bottom: 0;
+.Footer { bottom: 0; }
 
-  &-menu {
-    height: 2rem;
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
+[class$="-menu"] {
+  padding: .25rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+
+  & button { font-size: 5vw; }
+}
+
+.Uploader {
+  & input[type="file"] { display: none; }
+
+  & label {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+
+.Profile {
+  margin: auto;
+  text-align: center;
+
+  & > * { margin: .5rem auto; }
+
+  &-name {
+    font: {
+      weight: bold;
+      size: 10vw;
+    }
+  }
+
+  &-email { font-size: 5vw; }
+
+  &-avatar {
+    border-radius: 50%;
+    max-width: 300px;
+  }
+
+  &-photos {
+    & img {
+      margin: 1rem auto;
+      padding: 1rem;
+      background-color: #FFF;
+    }
+  }
+}
+
+.Camera {
+  &-photo {
+    padding: .5rem;
+    background-color: #FFF;
   }
 }

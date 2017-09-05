@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import app from './app.js'
+import app from './app'
 
 const d = document,
   c = console.log
@@ -51,16 +51,16 @@ export const signOut = () => {
 export const isAuth = () => {
   firebase.auth().onAuthStateChanged(user => {
     const EDgram = d.querySelector('.EDgram')
-    c(user)
+    // c(user)
 
     if ( user ) {
       EDgram.innerHTML = app()
       EDgram.classList.add('u-jc-flex-start')
-      c('Usuario Autenticado')
+      //c('Usuario Autenticado')
     } else {
       EDgram.innerHTML = signIn()
       EDgram.classList.remove('u-jc-flex-start')
-      c('Usuario NO Autenticado')
+      //c('Usuario NO Autenticado')
     }
   })
 }

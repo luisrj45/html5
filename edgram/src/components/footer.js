@@ -1,5 +1,6 @@
 import firebase from 'firebase'
-import { signOut } from './auth.js'
+import { signOut } from './auth'
+import { clearProgress } from './upload_progress'
 
 const footer = () => {
   const d = document,
@@ -14,6 +15,7 @@ const footer = () => {
 
       nav.addEventListener('click', e => {
         e.preventDefault()
+        window.scrollTo(0,0)
 
         if( e.target.parentElement.matches('button') ) {
           let btn = e.target.parentElement,
@@ -29,6 +31,8 @@ const footer = () => {
                 section.classList.remove('u-show', 'u-fadein')
               }
             })
+
+            clearProgress()
         }
       })
     }

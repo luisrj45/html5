@@ -9,7 +9,7 @@
 }
 
 .u-hide {
-  display: none;
+  display: none !important;
   opacity: 0;
 }
 
@@ -24,3 +24,13 @@
 }
 
 .u-jc-flex-start { justify-content: flex-start; }
+
+.u-disabled {
+  pointer-events: none;
+  & i { color: $fourth-color; }
+}
+
+.u-title {
+  margin: 1rem auto;
+  font-size: 8vw;
+}

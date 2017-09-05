@@ -1,6 +1,6 @@
 import css from './style.scss'
-import { init } from './components/helpers/init.js'
-import { isAuth } from './components/auth.js'
+import { init } from './components/helpers/init'
+import { isAuth } from './components/auth'
 
 init()
 
