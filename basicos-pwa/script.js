@@ -148,4 +148,3 @@
     fetchGitHubUser( localStorage.getItem('github'), true )
   })
 })(document, window, navigator, console.log);
-

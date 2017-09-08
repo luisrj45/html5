@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-demo-edteam-cache-v1',
+const CACHE_NAME = 'edgram-cache-v1',
   urlsToCache = [
     './',
     './?utm=homescreen',
@@ -7,7 +7,8 @@ const CACHE_NAME = 'pwa-demo-edteam-cache-v1',
     './style.css',
     './script.js',
     './favicon.ico',
-    './img/icon_192x192.png',
+    './assets/img/edgram-logo.png',
+    './icon_192x192.png',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
   ]
 
@@ -53,7 +54,7 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     //Miramos si la petición coincide con algún elemento del cache
     caches.match(e.request)
-      .then(res => {
+    .then(res => {
         console.log('Recuperando cache')
         if ( res ) {
           //Si coincide lo retornamos del cache
@@ -71,12 +72,12 @@ self.addEventListener('push', e => {
   let title = 'Push Notificación Demo',
     options = {
       body: 'Click para regresar a la aplicación',
-      icon: './img/icon_192x192.png',
+      icon: './icon_192x192.png',
       vibrate: [100, 50, 100],
       data: { id: 1 },
       actions: [
-        { 'action': 'Si', 'title': 'Amo esta aplicación :)', icon: './img/icon_192x192.png' },
-        { 'action': 'No', 'title': 'No me gusta esta aplicación :(', icon: './img/icon_192x192.png' }
+        { 'action': 'Si', 'title': 'Amo esta aplicación :)', icon: './icon_192x192.png' },
+        { 'action': 'No', 'title': 'No me gusta esta aplicación :(', icon: './icon_192x192.png' }
       ]
     }
 
@@ -113,8 +114,3 @@ self.addEventListener('sync', e => {
     )
   }
 })
-
-/* self.addEventListener('message' e => {
-  console.log('Desde la Sincronización de Fondo: ', e.data)
-  fetchGitHubUser( localStorage.getItem('github'), true )
-}) */

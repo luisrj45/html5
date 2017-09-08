@@ -3,7 +3,8 @@ const webpack = require('webpack'),
   srcDir = path.resolve( __dirname, 'src' ),
   publicDir = path.resolve( __dirname, 'public' ),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
-  ReloadPlugin = require('reload-html-webpack-plugin')
+  ReloadPlugin = require('reload-html-webpack-plugin'),
+  WebpackPwaManifest = require('webpack-pwa-manifest')
 
 module.exports = {
   context: srcDir,
@@ -25,7 +26,7 @@ module.exports = {
     open: true,
     hot: true,
     stats: 'errors-only',
-    port: 3000,
+    port: 4000,
     openPage: ''
   },
   module: {
@@ -69,7 +70,28 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(srcDir, 'template.html'),
       filename: 'index.html',
+      favicon: './assets/img/favicon.ico',
       chunks: ['script']
+    }),
+    new WebpackPwaManifest({
+      name: 'EDgram por EDteam',
+      short_name: 'EDgram',
+      description: 'Aplicación Web Progresiva inspirada en Instagram con fines educativos.',
+      orientation: 'portrait',
+      display: 'standalone',
+      start_url: 'index.html?utm=homescreen',
+      scope: './',
+      lang: 'es',
+      background_color: '#D24F56',
+      theme_color: '#2279D7',
+      icons: [
+        {
+          src: path.resolve('src/assets/img/edgram-icon-black.png'),
+          sizes: [16, 32, 64, 96, 128, 192, 256, 384, 512, 1024],
+          type: 'image/png'
+        }
+      ],
+      fingerprints: false
     })
   ]
 }

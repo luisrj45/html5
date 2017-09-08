@@ -6,7 +6,9 @@ const webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
-  PurifyCSSPlugin = require('purifycss-webpack')
+  PurifyCSSPlugin = require('purifycss-webpack'),
+  WebpackPwaManifest = require('webpack-pwa-manifest'),
+  CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   context: srcDir,
@@ -26,7 +28,7 @@ module.exports = {
     historyApiFallback: true,
     compress: true,
     open: true,
-    port: 3000,
+    port: 4001,
     openPage: ''
   },
   module: {
@@ -92,8 +94,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(srcDir, 'template.html'),
       filename: 'index.html',
-      title: 'Webpack Starter Kit - Vanilla JS',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, Vanilla JS y la filosofía de los componentes web.',
+      title: 'EDgram por EDteam',
+      description: 'Aplicación Web Progresiva inspirada en Instagram con fines educativos.',
       favicon: './assets/img/favicon.ico',
       hash: true,
       minify: {
@@ -101,6 +103,29 @@ module.exports = {
         removeComments: true
       },
       chunks: ['script']
-    })
+    }),
+    new WebpackPwaManifest({
+      name: 'EDgram por EDteam',
+      short_name: 'EDgram',
+      description: 'Aplicación Web Progresiva inspirada en Instagram con fines educativos.',
+      orientation: 'portrait',
+      display: 'standalone',
+      start_url: 'index.html?utm=homescreen',
+      scope: './',
+      lang: 'es',
+      background_color: '#D24F56',
+      theme_color: '#2279D7',
+      icons: [
+        {
+          src: path.resolve('src/assets/img/edgram-icon-black.png'),
+          sizes: [16, 32, 64, 96, 128, 192, 256, 384, 512, 1024],
+          type: 'image/png'
+        }
+      ],
+      fingerprints: false
+    }),
+    new CopyWebpackPlugin([
+      { from: 'sw.js' }
+    ])
   ]
 }
