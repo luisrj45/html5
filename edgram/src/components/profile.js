@@ -4,18 +4,18 @@ const profile = () => {
   const d = document,
     c = console.log,
     user = firebase.auth().currentUser,
-    dbRef = firebase.database().ref().child('photos')
+    dbRef = firebase.database().ref().child('edgram/photos')
 
   let profilePhotos = ''
 
   const profileScripts = setInterval(() => {
-    if ( d.readyState  === 'complete' ) {
+    if (d.readyState === 'complete') {
       clearInterval(profileScripts)
 
       dbRef.once('value', data => {
         //c( data, data.key, data.val() )
-        data.forEach( photo => {
-          if ( photo.val().uid === user.uid ) {
+        data.forEach(photo => {
+          if (photo.val().uid === user.uid) {
             profilePhotos += `<img src="${photo.val().photoURL}">`
           }
         })
@@ -23,7 +23,7 @@ const profile = () => {
       })
 
       dbRef.on('child_added', data => {
-        if ( data.val().uid === user.uid ) {
+        if (data.val().uid === user.uid) {
           d.querySelector('.Profile-photos').innerHTML += `<img src="${data.val().photoURL}">`
         }
       })

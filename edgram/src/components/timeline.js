@@ -3,15 +3,17 @@ import firebase from 'firebase'
 const timeline = () => {
   const d = document,
     c = console.log,
-    dbRef = firebase.database().ref().child('photos')
+    dbRef = firebase.database().ref().child('edgram/photos')
+
+  let photos
 
   const timelineScripts = setInterval(() => {
-    if ( d.readyState  === 'complete' ) {
+    if (d.readyState === 'complete') {
       clearInterval(timelineScripts)
 
       const timelinePhotos = d.querySelector('.Timeline-photos')
 
-      function photoTemplate (obj) {
+      function photoTemplate(obj) {
         return `
           <figure class="Photo">
             <img class="Photo-image" src="${obj.photoURL}">
@@ -25,18 +27,16 @@ const timeline = () => {
 
       dbRef.once('value', data => {
         //c( data, data.key, data.val() )
-        data.forEach( photo => {
-          timelinePhotos.insertAdjacentHTML(
-            'afterbegin',
-            photoTemplate( photo.val() )
-          )
+        data.forEach(photo => {
+          photos = photoTemplate(photo.val()) + photos
         })
+        timelinePhotos.innerHTML = photos
       })
 
       dbRef.on('child_added', data => {
         timelinePhotos.insertAdjacentHTML(
           'afterbegin',
-          photoTemplate( data.val() )
+          photoTemplate(data.val())
         )
       })
     }

@@ -9,7 +9,7 @@ const camera = () => {
     n = navigator
 
   const cameraScripts = setInterval(() => {
-    if ( d.readyState  === 'complete' ) {
+    if (d.readyState === 'complete') {
       clearInterval(cameraScripts)
       const cameraApp = d.querySelector('.Camera'),
         video = d.getElementById('camera-stream'),
@@ -33,7 +33,7 @@ const camera = () => {
           n.msGetUserMedia
         )
 
-        if ( !n.getMedia ) {
+        if (!n.getMedia) {
           output.innerHTML = errorMsg('Tu navegador NO soporta el uso de la cámara de tu dispositivo', null)
         } else {
           n.getMedia(
@@ -47,7 +47,7 @@ const camera = () => {
         }
       }
 
-      function takeSnapshot () {
+      function takeSnapshot() {
         let width = video.videoWidth,
           height = video.videoHeight
 
@@ -108,11 +108,11 @@ const camera = () => {
 
       uploadPhotoBtn.addEventListener('click', e => {
         e.preventDefault()
-        const storageRef = firebase.storage().ref().child('photos'),
-          dbRef = firebase.database().ref().child('photos'),
+        const storageRef = firebase.storage().ref().child('edgram/photos'),
+          dbRef = firebase.database().ref().child('edgram/photos'),
           user = firebase.auth().currentUser
 
-        let photoName = `photo_${Math.floor(Math.random()*10000000)}`,
+        let photoName = `photo_${Math.floor(Math.random() * 10000000)}`,
           uploadTask = storageRef.child(photoName).putString(snapshot, 'data_url')
 
         uploadTask.on('state_changed', data => {
@@ -132,7 +132,7 @@ const camera = () => {
               setTimeout(() => output.innerHTML = '', 3000)
               cameraReset()
             })
-            .catch( err => output.innerHTML = errorMsg(`${err.mesagge}`, err) )
+            .catch(err => output.innerHTML = errorMsg(`${err.mesagge}`, err))
         })
       })
     }
@@ -147,7 +147,7 @@ const camera = () => {
         <button id="take-photo" title="Tomar Foto"><i class="fa fa-camera"></i></button>
         <button class="u-disabled" id="delete-photo" title="Borrar Foto"><i class="fa fa-trash"></i></button>
         <button class="u-disabled" id="upload-photo" title="Subir Foto"><i class="fa fa-upload"></i></button>
-        <button class="u-disabled" id="download-photo" title="Guardar Foto"><a href="#" download="selfie_${Math.floor(Math.random()*10000000)}.png"><i class="fa fa-download"></i></a></button>
+        <button class="u-disabled" id="download-photo" title="Guardar Foto"><a href="#" download="selfie_${Math.floor(Math.random() * 10000000)}.png"><i class="fa fa-download"></i></a></button>
       </nav>
       <canvas id="canvas-snap"></canvas>
       ${progressBar()}

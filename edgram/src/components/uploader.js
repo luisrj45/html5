@@ -8,53 +8,53 @@ const uploader = () => {
     c = console.log
 
   const uploaderScripts = setInterval(() => {
-    if ( d.readyState  === 'complete' ) {
+    if (d.readyState === 'complete') {
       clearInterval(uploaderScripts)
 
-    const storageRef = firebase.storage().ref().child('photos'),
-      dbRef = firebase.database().ref().child('photos'),
-      user = firebase.auth().currentUser,
-      form = d.getElementById('upload'),
-      uploader = d.getElementById('uploader'),
-      output = d.querySelector('.Uploader').querySelector('.Progress-output')
+      const storageRef = firebase.storage().ref().child('edgram/photos'),
+        dbRef = firebase.database().ref().child('edgram/photos'),
+        user = firebase.auth().currentUser,
+        form = d.getElementById('upload'),
+        uploader = d.getElementById('uploader'),
+        output = d.querySelector('.Uploader').querySelector('.Progress-output')
 
-    uploader.addEventListener('change', e => {
-      output.innerHTML = ''
+      uploader.addEventListener('change', e => {
+        output.innerHTML = ''
 
-      Array.from(e.target.files).forEach(file => {
-        //c(e.target.files, file)
-        if ( file.type.match('image.*') ) {
-          let uploadTask = storageRef.child(file.name).put(file)
+        Array.from(e.target.files).forEach(file => {
+          //c(e.target.files, file)
+          if (file.type.match('image.*')) {
+            let uploadTask = storageRef.child(file.name).put(file)
 
-          uploadTask.on('state_changed', data => {
-            //c(data)
-            showProgress()
-            progressStatus(data)
-          }, err => {
-            //c(err, err.code, err.mesagge)
-            output.innerHTML = errorMsg(`${err.mesagge}`, err)
-          }, () => {
-            storageRef.child(file.name).getDownloadURL()
-              .then(url => {
-                //c(url)
-                output.insertAdjacentHTML(
-                  'afterbegin',
-                  `${successMsg('Tu foto se ha subido')}<img src="${url}">`
-                )
-                savePḧotoInDB(url, user)
-                hideProgress()
-              })
-              .catch( err => output.innerHTML = errorMsg(`${err.mesagge}`, err) )
-          })
-        } else {
-          output.innerHTML = errorMsg('Tu archivo debe ser una imagen', null)
-        }
+            uploadTask.on('state_changed', data => {
+              //c(data)
+              showProgress()
+              progressStatus(data)
+            }, err => {
+              //c(err, err.code, err.mesagge)
+              output.innerHTML = errorMsg(`${err.mesagge}`, err)
+            }, () => {
+              storageRef.child(file.name).getDownloadURL()
+                .then(url => {
+                  //c(url)
+                  output.insertAdjacentHTML(
+                    'afterbegin',
+                    `${successMsg('Tu foto se ha subido')}<img src="${url}">`
+                  )
+                  savePḧotoInDB(url, user)
+                  hideProgress()
+                })
+                .catch(err => output.innerHTML = errorMsg(`${err.mesagge}`, err))
+            })
+          } else {
+            output.innerHTML = errorMsg('Tu archivo debe ser una imagen', null)
+          }
+        })
+
+        form.reset()
       })
 
-      form.reset()
-    })
-
-    //c(user)
+      //c(user)
     }
   }, 100)
 
